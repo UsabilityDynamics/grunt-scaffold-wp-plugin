@@ -5,10 +5,12 @@
   "main": "gruntfile.js",
   "dependencies": {
     "async": "^0.9.0",
+    "commander": "^2.2.0",
+    "deep-extend": "^0.2.10",
+    "findup-sync": "^0.1.3",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-init": "^0.3.2",
-    "findup-sync": "^0.1.3",
     "load-grunt-tasks": "^0.6.0",
     "lodash": "^2.4.1"
   },

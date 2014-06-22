@@ -10,7 +10,8 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "mocha --ui exports --reporter mocha-audit-reporter",
+    "test": "mocha --ui exports --reporter list",
+    "audit": "mocha --ui exports --reporter mocha-audit-reporter",
     "install": "grunt install",
     "start": "grunt",
     "prepublish": "grunt publish"
@@ -20,6 +21,9 @@
   },
   "config": {
     "audit": {}
+  },
+  "optionalDependencies": {
+    "mocha-audit-reporter": "*"    
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -37,7 +41,6 @@
     "grunt-phpcs": "~0.2.2",
     "grunt-phpunit": "~0.3.3",
     "grunt-shell": "~0.6.0",
-    "mocha-audit-reporter": "*",
     "should": "~4.0.4",
     "yuidocjs": "^0.3.50"
   },

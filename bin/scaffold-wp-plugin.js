@@ -1,15 +1,33 @@
 #!/usr/bin/env node
 
-'use strict';
-
-// Nodejs libs.
+var findUp = require( 'findup-sync' );
 var path = require('path');
+var spawn = require('child_process').spawn;
+var async = require( 'async' );
 
-// External libs.
-var hooker = require('hooker');
+module.modulePath = path.dirname( findUp( 'package.json', { cwd: __dirname } ) );
 
-// This has to be loaded before the "prompt" dep loads it, or colors won't
-// get disabled with --no-color correctly.
-require('colors');
+// console.log( module.modulePath );
+console.log( 'Installing into', process.cwd() );
 
-echo "scaffold wp plugin...";
+var init = spawn( 'grunt-init', [ module.modulePath, '--no-color' ], {
+  end: process.env,
+  cwd: process.cwd(),
+  stdio: 'inherit',
+  encoding: 'utf8'
+});
+
+init.on( 'close', function (code, signal) {
+  //  console.log('closed grunt-init');
+  
+  // Should install all modules and then run "grunt install"
+  var npm = spawn( 'npm', [  'install' ], {
+    end: process.env,
+    cwd: process.cwd(),
+    stdio: 'inherit',
+    encoding: 'utf8'
+  });
+
+  npm.on( 'close', 'npm ran' );
+  
+});
