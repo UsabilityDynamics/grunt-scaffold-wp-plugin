@@ -3,6 +3,8 @@
 var findUp = require( 'findup-sync' );
 var path = require('path');
 var spawn = require('child_process').spawn;
+
+// @todo Use async.auto for structure.
 var async = require( 'async' );
 
 module.modulePath = path.dirname( findUp( 'package.json', { cwd: __dirname } ) );
@@ -28,6 +30,10 @@ init.on( 'close', function (code, signal) {
     encoding: 'utf8'
   });
 
-  npm.on( 'close', 'npm ran' );
+  npm.on( 'close', function() {
+    console.log( 'modules installed.' );
+  } );
   
 });
+
+// @todo All add GitHub repository initialization and Wiki subdmoule.

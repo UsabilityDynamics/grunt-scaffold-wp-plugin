@@ -174,9 +174,9 @@ module.exports = function build( grunt ) {
 
   
   // Register NPM Tasks.
-  grunt.registerTask( 'default', [ 'config:staging' ], function() {
+  grunt.registerTask( 'default', function() {
 
-    grunt.task.run( 'mochaTest' );
+    //grunt.task.run( 'mochaTest' );
     
     if( grunt.config.get( 'meta.ci' ) ) {
       // grunt.task.run( 'test:quality' );
@@ -184,16 +184,28 @@ module.exports = function build( grunt ) {
     
   });
 
-  // Run Quick Tests.
-  grunt.registerTask( 'test', [ 'clean:composer', 'shell:install', 'mochaTest' , 'phpunit' ] );
   
-  // Run Module Audit.
-  grunt.registerTask( 'test:quality', [ 'phpunit', 'phpcs' ] );
-  
-  // Build Distribution.
-  grunt.registerTask( 'publish', [ 'markdown', 'yuidoc' ] );
+  // Register NPM Tasks.
+  grunt.registerTask( 'install', function() {
 
-  // Update Environment.
-  grunt.registerTask( 'update', [ 'clean:update', 'shell:update' ] );
+    //grunt.task.run( 'mochaTest' );
+    
+    if( grunt.config.get( 'meta.ci' ) ) {
+      // grunt.task.run( 'test:quality' );
+    }
+    
+  });
+
+  // Register NPM Tasks.
+  grunt.registerTask( 'publish', function() {
+
+    //grunt.task.run( 'mochaTest' );
+    
+    if( grunt.config.get( 'meta.ci' ) ) {
+      // grunt.task.run( 'test:quality' );
+    }
+    
+  });
+
 
 };
