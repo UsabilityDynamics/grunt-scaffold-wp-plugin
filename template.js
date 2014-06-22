@@ -9,7 +9,9 @@
  * @version 1.0.0
  */
 var deepExtend = require( 'deep-extend' );
-var options = {type: 'module'};
+var options = {
+  type: 'module'
+};
 
 exports.description = 'Create Wordpress Plugin.';
 exports.template = function(grunt, init, done) {
