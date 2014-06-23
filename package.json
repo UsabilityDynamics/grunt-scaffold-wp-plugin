@@ -33,9 +33,11 @@
     "should": "^4.0.4"
   },
   "scripts": {
-    "test": "mocha --ui exports --reporter mocha-audit-reporter",
+    "test": "mocha --ui exports --reporter list",
+    "install": "",
     "start": "grunt --help",
-    "prepublish": "grunt publish"
+    "publish": "grunt publish",
+    "prepublish": "grunt prepublish"
   },
   "repository": {
     "type": "git",

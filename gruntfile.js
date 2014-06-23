@@ -10,6 +10,7 @@ module.exports = function build( grunt ) {
   // Require Utility Modules.
   var joinPath  = require( 'path' ).join;
   var findup    = require( 'findup-sync' );
+  var symlink   = require( 'fs' ).symlink;
 
   // Determine Paths.
   var _paths = {
@@ -47,10 +48,28 @@ module.exports = function build( grunt ) {
     }
     
   });
-  
-  grunt.registerTask( 'publish', function() {
+
+  grunt.registerTask( 'install', function() {
+    console.log( '===Install===' );
+    
+    var done = this.async();
+    
+    symlink( __dirname, '/Users/potanin/.grunt-init/wp-plugin', 'dir', function( error ) {      
+      console.log( 'linked', error ? error.message : 'successfully' );      
+      done();      
+    });      
     
   });
   
-
+  
+  grunt.registerTask( 'publish', function() {
+    console.log( '===Publish===' );
+    
+  });
+  
+  grunt.registerTask( 'prepublish', function() {
+    console.log( '===Prepublish===' );
+    
+  });
+  
 };
