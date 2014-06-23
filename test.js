@@ -1,11 +1,11 @@
 module.exports = {  
   'Valid project': { 
     
-    'has valid project-yml file.': require( 'grunt-scaffold-module' ).testProjectValidity({
+    'has project-yml file.': require( 'grunt-scaffold-module' ).testProjectValidity({
       debug: false
     }),
     
-    'has valid project-yml structure.': require( 'grunt-scaffold-module' ).testStructure({
+    'has requied properties.': require( 'grunt-scaffold-module' ).testStructure({
       debug: false      
     })
     
