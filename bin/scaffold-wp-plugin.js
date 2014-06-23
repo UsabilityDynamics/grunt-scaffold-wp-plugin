@@ -1,9 +1,30 @@
 #!/usr/bin/env node
 
+
+var phantomflow = require( 'phantomflow' );
 var findUp = require( 'findup-sync' );
 var path = require('path');
 var spawn = require('child_process').spawn;
 
+
+var flow = phantomflow.init({
+	debug: 1,
+	createReport: true,
+//  results: 'static/results',
+	test: '/repositories/node-serve-php/test/acceptance/can-order-coffee-or-something.js'
+});
+
+console.log( 'flow', flow );
+//flow.report();
+
+flow.run(function(){
+  console.log( 'out' );
+    process.exit(0); // callback is executed when PhantomFlow is complete
+}); 
+
+
+
+return;
 // @todo Use async.auto for structure.
 var async = require( 'async' );
 
