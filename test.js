@@ -4,6 +4,7 @@ module.exports = {
     
     'exposes methods': function() {
       
+      console.log( require( 'grunt-scaffold-module' ) );
       
       
     } 
