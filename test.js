@@ -1,5 +1,5 @@
 module.exports = {  
-  'Valid project': { 
+  'Project': { 
     
     'has project-yml file.': require( 'grunt-scaffold-module' ).testProjectValidity({
       debug: false
@@ -11,7 +11,7 @@ module.exports = {
     
   },
 
-  'Valid API': {
+  'API': {
 
     'has expected methods': require( 'grunt-scaffold-module' ).testMethods({
       debug: false
@@ -23,10 +23,23 @@ module.exports = {
 
   },
 
-  'Unit tests': {    
-
-    'phpUnit': require( 'grunt-scaffold-module' ).phpUnit({
-      debug: false
+  'Coverage': {    
+    
+    'PHP Unit Tests': require( 'grunt-scaffold-module' ).phpUnit({
+      dir: 'lib/*.php',
+      severity: '',
+      standard: 'Zend',
+      warningSeverity: '',
+      ignore: 'php'
+    }),
+    
+    'PHP Mass Detector': require( 'grunt-scaffold-module' ).phpmd({
+      dir: 'lib/*.php',
+      rulesets: 'codesize'
+    }),
+    
+    'JS Hint': require( 'grunt-scaffold-module' ).jsHint({
+      
     }),
 
     'nodeUnit': require( 'grunt-scaffold-module' ).nodeUnit({
@@ -34,7 +47,8 @@ module.exports = {
     }),
 
     'custom test': function customTest() {  
-      console.log({'asdf': "asdf"});
+      //console.log({'asdf': "asdf"});      
+      //console.log( this._runnable );      
     }
     
   }

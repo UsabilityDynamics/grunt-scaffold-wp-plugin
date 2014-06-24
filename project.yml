@@ -1,2 +1,18 @@
-overview:
-  - "Creates WordPress plugins."
+objectives:
+  - "Automate Usability Dynamics' auditing and testing."
+  - "Utilize Node.js and Grunt to perform Auditing/Testing tasks."
+  - "Module that scaffolds WordPress plugins via Grunt"
+  - "Automates process by installing Node modules and creating GitHub repository."
+  
+features:
+  - "Can be installed globally and called via scaffold-wp-plugin which will start scaffolding process into CWD."
+  - "If repository URL appears valid and GitHub credentials are known, attempt to create new GitHub repository and push project."
+  - "Detect URL or existance in CWD of a project.yml definition."
+  - "Uses Grunt Tasks for all available tasks."
+  - "Spawns child instance for each triggered command via grunt-job or just spawn."
+  - "Can validate or generate readme.txt file."
+    
+api:
+  - "scaffold-wp-plugin init - Init scaffolding."
+  - "scaffold-wp-plugin validate - Try to validate project.yml."
+  - "scaffold-wp-plugin update - Update tests and configration files."
