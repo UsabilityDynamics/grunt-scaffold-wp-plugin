@@ -35,6 +35,8 @@ exports.template = function(grunt, init, done) {
 
   	// Empty folders won't be copied over so make them here
   	grunt.file.mkdir('test/');
+  	grunt.file.mkdir('test/acceptance');
+  	grunt.file.mkdir('test/phpunit');
   	grunt.file.mkdir('vendor/libraries');
   	grunt.file.mkdir('vendor/modules');
 
