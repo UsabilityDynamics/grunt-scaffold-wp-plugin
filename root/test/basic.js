@@ -5,7 +5,9 @@ module.exports = {
     'has valid public methods.': require( 'grunt-scaffold-module' ).testMethods(),
     'has valid public classess.': require( 'grunt-scaffold-module' ).testClasses(),
     'phpUnit validates..': require( 'grunt-scaffold-module' ).phpUnit({
-      
+      cwd: process.cwd(),
+      testDirectory: '../',
+      options: {}
     })        
   } 
 }
