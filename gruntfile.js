@@ -7,6 +7,13 @@
  */
 module.exports = function build( grunt ) {
 
+  // Automatically Load Tasks.
+  require( 'load-grunt-tasks' )( grunt, {
+    pattern: 'grunt-*',
+    config: './package.json',
+    scope: 'devDependencies'
+  });
+
   grunt.initConfig({
     
     // Read Composer File.
@@ -30,13 +37,6 @@ module.exports = function build( grunt ) {
     staticFiles: findup( 'static' )
   };
 
-  // Automatically Load Tasks.
-  require( 'load-grunt-tasks' )( grunt, {
-    pattern: 'grunt-*',
-    config: './package.json',
-    scope: 'devDependencies'
-  });
-  
   // Register Internal Tasks.
   grunt.loadTasks( 'tasks' );
   

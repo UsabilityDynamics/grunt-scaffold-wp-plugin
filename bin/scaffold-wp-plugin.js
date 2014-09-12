@@ -20,7 +20,7 @@ require( 'veneer-terminal' ).create( function scaffoldTerminal( error ) {
   
   // Accepted Commands.
   this.command( 'create', 'Create new module in current directory from scaffold.' ).action( Create.bind( this ) );
-  this.command( 'update',   'Updte existing module' ).action( Update.bind( this ) );
+  this.command( 'update',   'Update existing module' ).action( Update.bind( this ) );
   this.command( 'validate', 'Validate an existing module' ).action( Validate.bind( this ) );
 
 });

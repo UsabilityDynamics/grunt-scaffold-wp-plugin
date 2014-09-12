@@ -19,7 +19,7 @@ exports.template = function(grunt, init, done) {
   var prompts = [
     init.prompt( 'name' ),
     init.prompt( 'repository' ),
-    init.prompt( 'version', '0.0.1' ),
+    init.prompt( 'version', '1.0.0' ),
     init.prompt( 'description', 'WordPress plugin.' )  
   ];
 
@@ -32,13 +32,6 @@ exports.template = function(grunt, init, done) {
 
     // Copy Files.
     init.copyAndProcess( init.filesToCopy( _package ), _package );
-
-  	// Empty folders won't be copied over so make them here
-  	grunt.file.mkdir('test/');
-  	grunt.file.mkdir('test/acceptance');
-  	grunt.file.mkdir('test/phpunit');
-  	grunt.file.mkdir('vendor/libraries');
-  	grunt.file.mkdir('vendor/modules');
 
     // Write Package to Disk.
     init.writePackageJSON( 'package.json', _package );
