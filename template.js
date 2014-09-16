@@ -23,10 +23,10 @@ exports.template = function(grunt, init, done) {
     init.prompt( 'plugin_url', 'https://usabilitydynamics.com' ),
     init.prompt( 'github_name', 'usabilitydynamics/wp-my-plugin' ),
     init.prompt( 'github_short_name', 'wp-my-plugin' ),
-    init.prompt( 'vesrion', '1.0.0' ),
+    init.prompt( 'version', '1.0.0' ),
     init.prompt( 'description' ),
     init.prompt( 'text_domain' ),
-    init.prompt( 'namespace', '\UsabilityDynamics\Plugin' ),
+    init.prompt( 'namespace', 'UsabilityDynamics\\Plugin' ),
     init.prompt( 'bootstrap_class', 'Bootstrap' )
   ];
 

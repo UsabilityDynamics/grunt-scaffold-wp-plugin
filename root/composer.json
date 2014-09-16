@@ -1,39 +1,47 @@
 {
-  "name": "{%= name %}",
+  "name": "{%= github_name %}",
   "version": "{%= version %}",
-  "type": "theme",
-  "description": "{%= description %}",
-  "homepage": "{%= homepage %}",
-  "private": true,
+  "type": "plugin",
+  "minimum-stability": "dev",
+  "homepage": "http://github.com/UsabilityDynamics/{%= github_short_name %}",
   "author": {
-    "name": "{%= author_name %}",
-    "url": "{%= author_url %}"
-  },
-  "license": "{%= license %}",
-  "license_url": "{%= license_url %}",
-  "tags": [ "one-column", "two-column", "translation-ready", "responsive", "wordpress", "theme" ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/UsabilityDynamics/{%= short_name %}.git"
+    "name": "UsabilityDynamics, Inc.",
+    "url": "https://usabilitydynamics.com/"
   },
   "repositories": [
     {
-      "type": "git",
-      "url": "git@github.com:UsabilityDynamics/lib-settings.git",
-      "trunk-path": "trunk",
-      "branches-path": "branches",
-      "tags-path": "tags"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:UsabilityDynamics/lib-ui.git",
-      "trunk-path": "trunk",
-      "branches-path": "branches",
-      "tags-path": "tags"
+      "type": "composer",
+      "url": "http://repository.usabilitydynamics.com"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UsabilityDynamics/{%= github_short_name %}.git"
+  },
   "require": {
-    "UsabilityDynamics/lib-settings": "*",
-    "UsabilityDynamics/lib-ui": "dev-master"
+    "php": ">=5.3",
+    "usabilitydynamics/lib-wp-bootstrap": "1.0.0"
+  },
+  "autoload": {
+    "classmap": [ "lib/classes" ]
+  },
+  "archive": {
+    "exclude": [
+      "node_modules",
+      ".gitignore",
+      "test",
+      "circle.yml",
+      "composer.lock",
+      "gruntfile.js",
+      "package.json"
+    ]
+  },
+  "extra": {
+    "schemas": {
+      "dependencies" : {},
+      "plugins" : {},
+      "licenses" : {},
+      "license" : {}
+    }
   }
 }

@@ -1,7 +1,13 @@
+cache
+vendor
 temp
 node_modules
-npm-debug.log
+static/cache
 static/codex
+npm-debug.log
+wp-test-config.php
+
+.git
 .svn
 .idea
 .idea/workspace.xml
@@ -18,4 +24,3 @@ static/codex
 *.out
 *.pid
 *.gz
-vendor
