@@ -201,8 +201,8 @@ else
 
   echo "Set configuration to proceed"
   git config --global push.default simple
-  #git config --global user.email --add "$( git log -1 --pretty=%an )"
-  #git config --global user.name --add "$( git log -1 --pretty=%ae )"
+  git config --global user.email "$( git log -1 --pretty=%an )"
+  git config --global user.name "$( git log -1 --pretty=%ae )"
   echo "---"
 
   echo "Add/remove files"
