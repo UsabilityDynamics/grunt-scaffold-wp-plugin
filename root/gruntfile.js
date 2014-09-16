@@ -21,7 +21,7 @@ module.exports = function build( grunt ) {
     // Locale.
     pot: {
       options:{
-        package_name: '{%= github_short_name %}',
+        package_name: '{%= name %}',
         package_version: '<%= package.version %>',
         text_domain: '{%= text_domain %}',
         dest: 'static/languages/',

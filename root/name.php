@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: {%= plugin_name %}
- * Plugin URI: {%= plugin_url %}
+ * Plugin Name: {%= title %}
+ * Plugin URI: {%= homepage %}
  * Description: {%= description %}
  * Author: Usability Dynamics, Inc.
  * Version: {%= version %}
@@ -12,7 +12,7 @@
  *
  */
 
-if( !function_exists( 'ud_get_{%= plugin_slug %}' ) ) {
+if( !function_exists( 'ud_get_{%= slug %}' ) ) {
 
   if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
     require_once ( __DIR__ . '/vendor/autoload.php' );
@@ -24,7 +24,7 @@ if( !function_exists( 'ud_get_{%= plugin_slug %}' ) ) {
    * @author Usability Dynamics, Inc.
    * @since {%= version %}
    */
-  function ud_get_{%= plugin_slug %}( $key = false, $default = null ) {
+  function ud_get_{%= slug %}( $key = false, $default = null ) {
     if( class_exists( '\{%= namespace %}\{%= bootstrap_class %}' ) ) {
       $instance = \{%= namespace %}\{%= bootstrap_class %}::get_instance();
       return $key ? $instance->get( $key, $default ) : $instance;
@@ -35,4 +35,4 @@ if( !function_exists( 'ud_get_{%= plugin_slug %}' ) ) {
 }
 
 //** Initialize. */
-ud_get_{%= plugin_slug %}();
+ud_get_{%= slug %}();

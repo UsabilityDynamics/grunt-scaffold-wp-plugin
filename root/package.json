@@ -1,12 +1,5 @@
 {
-  "name": "{%= github_name %}",
-  "version": "{%= version %}",
-  "description": "{%= description %}",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/UsabilityDynamics/{%= github_short_name %}"
-  },
   "engines": {
     "node": ">= 0.10.0"
   },

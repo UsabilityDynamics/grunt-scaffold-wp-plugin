@@ -142,7 +142,7 @@ if [ -z $RELEASE_VERSION ] ; then
 
   echo "No [release:{tag}] shortcode found."
   echo "Finish process."
-  exit 1
+  exit 0
   
 else
 

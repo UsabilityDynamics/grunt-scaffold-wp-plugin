@@ -17,15 +17,20 @@ exports.description = 'Create Wordpress Plugin.';
 exports.template = function(grunt, init, done) {
 
   var prompts = [
-    init.prompt( 'plugin_name', 'My WP-Plugin' ),
-    init.prompt( 'plugin_filename', 'plugin-file' ),
-    init.prompt( 'plugin_slug', 'plugin_slug_with_underscore' ),
-    init.prompt( 'plugin_url', 'https://usabilitydynamics.com' ),
-    init.prompt( 'github_name', 'usabilitydynamics/wp-my-plugin' ),
-    init.prompt( 'github_short_name', 'wp-my-plugin' ),
+    init.prompt( 'title', 'My WP-Plugin' ),
+    init.prompt( 'name', 'my-wp-plugin' ),
+    init.prompt( 'slug', 'my_wp_plugin_with_underscore' ),
     init.prompt( 'version', '1.0.0' ),
     init.prompt( 'description' ),
+    init.prompt( 'repository', 'https://github.com/UsabilityDynamics/my-wp-plugin' ),
+    init.prompt( 'homepage', 'https://usabilitydynamics.com' ),
+    init.prompt( 'author_name', 'UsabilityDynamics, Inc.' ),
+    init.prompt( 'author_url', 'https://usabilitydynamics.com' ),
+    
+    init.prompt( 'github_vendor', 'usabilitydynamics' ),
+    init.prompt( 'github_name', 'wp-my-plugin' ),
     init.prompt( 'text_domain' ),
+    
     init.prompt( 'namespace', 'UsabilityDynamics\\Plugin' ),
     init.prompt( 'bootstrap_class', 'Bootstrap' )
   ];

@@ -15,8 +15,8 @@ class UD_Plugin_WP_UnitTestCase extends WP_UnitTestCase {
   function setUp() {
 	  parent::setUp();
     $this->root_dir = dirname( dirname( dirname( __DIR__ ) ) );
-    if( file_exists( $this->root_dir . '/{%= plugin_filename %}.php' ) ) {
-      include_once( $this->root_dir . '/{%= plugin_filename %}.php' );
+    if( file_exists( $this->root_dir . '/{%= name %}.php' ) ) {
+      include_once( $this->root_dir . '/{%= name %}.php' );
     }
     if( !class_exists( '\{%= namespace %}\{%= bootstrap_class %}' ) ) {
       $this->fail( 'Plugin is not available.' );

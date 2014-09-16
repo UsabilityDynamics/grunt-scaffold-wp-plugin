@@ -1,12 +1,12 @@
 {
-  "name": "{%= github_name %}",
+  "name": "{%= github_vendor %}/{%= github_name %}",
   "version": "{%= version %}",
   "type": "plugin",
   "minimum-stability": "dev",
-  "homepage": "http://github.com/UsabilityDynamics/{%= github_short_name %}",
+  "homepage": "http://github.com/{%= github_vendor %}/{%= github_name %}",
   "author": {
-    "name": "UsabilityDynamics, Inc.",
-    "url": "https://usabilitydynamics.com/"
+    "name": "{%= author_name %}",
+    "url": "{%= author_url %}"
   },
   "repositories": [
     {
@@ -16,11 +16,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/UsabilityDynamics/{%= github_short_name %}.git"
+    "url": "https://github.com/{%= github_vendor %}/{%= github_name %}.git"
   },
   "require": {
     "php": ">=5.3",
-    "usabilitydynamics/lib-wp-bootstrap": "1.0.0"
+    "usabilitydynamics/lib-wp-bootstrap": "master"
+  },
+  "require-dev": {
+    "usabilitydynamics/lib-wp-phpunit": "master",
+    "codeclimate/php-test-reporter": "dev-master"
   },
   "autoload": {
     "classmap": [ "lib/classes" ]
@@ -38,10 +42,14 @@
   },
   "extra": {
     "schemas": {
-      "dependencies" : {},
-      "plugins" : {},
-      "licenses" : {},
-      "license" : {}
+      "dependencies" : {
+        "modules": {},
+        "plugins": {},
+      },
+      "licenses" : {
+        "client" : false,
+        "product" : false
+      }
     }
   }
 }
