@@ -5,7 +5,7 @@ objectives:
   - "Automates process by installing Node modules and creating GitHub repository."
   
 features:
-  - "Can be installed globally and called via scaffold-wp-plugin which will start scaffolding process into CWD."
+  - "Can be installed globally and called via grunt-scaffold-wp-plugin which will start scaffolding process into CWD."
   - "If repository URL appears valid and GitHub credentials are known, attempt to create new GitHub repository and push project."
   - "Detect URL or existance in CWD of a project.yml definition."
   - "Uses Grunt Tasks for all available tasks."

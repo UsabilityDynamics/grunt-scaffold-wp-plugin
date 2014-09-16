@@ -17,10 +17,17 @@ exports.description = 'Create Wordpress Plugin.';
 exports.template = function(grunt, init, done) {
 
   var prompts = [
-    init.prompt( 'name' ),
-    init.prompt( 'repository' ),
-    init.prompt( 'version', '0.0.1' ),
-    init.prompt( 'description', 'WordPress plugin.' )  
+    init.prompt( 'plugin_name' ),
+    init.prompt( 'plugin_filename', 'plugin-file' ),
+    init.prompt( 'plugin_slug', 'plugin_slug_with_underscore' ),
+    init.prompt( 'plugin_url', 'https://usabilitydynamics.com' ),
+    init.prompt( 'github_name', 'usabilitydynamics/wp-my-plugin' ),
+    init.prompt( 'github_short_name', 'wp-my-plugin' ),
+    init.prompt( 'vesrion', '1.0.0' ),
+    init.prompt( 'description' ),
+    init.prompt( 'text_domain' ),
+    init.prompt( 'namespace', '\UsabilityDynamics\Plugin' ),
+    init.prompt( 'bootstrap_class', 'Bootstrap' )
   ];
 
   init.process( options, prompts, processCallback );
@@ -32,13 +39,6 @@ exports.template = function(grunt, init, done) {
 
     // Copy Files.
     init.copyAndProcess( init.filesToCopy( _package ), _package );
-
-  	// Empty folders won't be copied over so make them here
-  	grunt.file.mkdir('test/');
-  	grunt.file.mkdir('test/acceptance');
-  	grunt.file.mkdir('test/phpunit');
-  	grunt.file.mkdir('vendor/libraries');
-  	grunt.file.mkdir('vendor/modules');
 
     // Write Package to Disk.
     init.writePackageJSON( 'package.json', _package );

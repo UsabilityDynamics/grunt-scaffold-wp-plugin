@@ -1,7 +1,4 @@
 {
-  "static/scripts/name.js": "static/scripts/{%= name %}.js",
-  "static/styles/name.less": "static/styles/{%= name %}.less",
-  "lib/class-name.php": "lib/class-{%= name %}.php",
-  "lib/class-name-bootstrap.php": "lib/class-{%= name %}-bootstrap.php",
+  "lib/classes/class-name-bootstrap.php": "lib/classes/class-{%= name %}-bootstrap.php",
   "name.php": "{%= name %}.php" 
 }
