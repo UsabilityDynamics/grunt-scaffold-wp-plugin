@@ -1,4 +1,4 @@
-# Wordpress Theme for WP-Property plugin Scaffolding
+# Wordpress Plugin Scaffolding
 
 > Create a Node.js module with.
 

@@ -1,4 +1,4 @@
 {
-  "lib/classes/class-name-bootstrap.php": "lib/classes/class-{%= name %}-bootstrap.php",
-  "name.php": "{%= name %}.php" 
+  "lib/classes/class-name-bootstrap.php": "lib/classes/class-{%= bootstrap_class %}.php",
+  "name.php": "{%= plugin_filename %}.php"
 }

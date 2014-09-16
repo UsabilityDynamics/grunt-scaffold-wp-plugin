@@ -1,24 +1,11 @@
 /**
- * Library Build.
+ * Build Plugin
  *
- * @author peshkov@UD
- * @version 1.1.2
+ * @author Usability Dynamics, Inc.
+ * @version 2.0.0
  * @param grunt
  */
 module.exports = function build( grunt ) {
-
-  // Require Utility Modules.
-  var joinPath  = require( 'path' ).join;
-  var findup    = require( 'findup-sync' );
-
-  // Determine Paths.
-  var _paths = {
-    composer: findup( 'composer.json' ),
-    phpcs: findup( 'vendor/bin/phpcs' ) || findup( 'phpcs', { cwd: '/usr/bin' } ),
-    vendor: findup( 'vendor' ),
-    jsTests: findup( 'test' ),
-    staticFiles: findup( 'static' )
-  };
 
   // Automatically Load Tasks.
   require( 'load-grunt-tasks' )( grunt, {
@@ -27,24 +14,32 @@ module.exports = function build( grunt ) {
     scope: 'devDependencies'
   });
 
-  grunt.initConfig({
-    
-    // Read Composer File.
-    composer: grunt.file.readJSON( 'composer.json' ),
-    
-    // Sets generic config settings, callable via grunt.config.get('meta').environment or <%= grunt.config.get("meta").environment %>
-    meta: {
-      ci: process.env.CI || process.env.CIRCLECI ? true : false,
-      environment: process.env.NODE_ENV || 'production'
-    },    
+  grunt.initConfig( {
 
-    // Generate Documentation.
+    package: grunt.file.readJSON( 'composer.json' ),
+
+    // Locale.
+    pot: {
+      options:{
+        package_name: '{%= github_short_name %}',
+        package_version: '<%= package.version %>',
+        text_domain: '{%= text_domain %}',
+        dest: 'static/languages/',
+        keywords: [ 'gettext', 'ngettext:1,2' ]
+      },
+      files:{
+        src:  [ '**/*.php', 'lib/*.php' ],
+        expand: true
+      }
+    },
+    
+    // Documentation.
     yuidoc: {
       compile: {
-        name: '<%= composer.name %>',
-        description: '<%= composer.description %>',
-        version: '<%= composer.version %>',
-        url: '<%= composer.homepage %>',
+        name: '<%= package.name %>',
+        description: '<%= package.description %>',
+        version: '<%= package.version %>',
+        url: '<%= package.homepage %>',
         options: {
           paths: 'lib',
           outdir: 'static/codex/'
@@ -52,38 +47,33 @@ module.exports = function build( grunt ) {
       }
     },
 
-    /**
-     * Runs PHPUnit Tests
-     *
-     */
-    phpunit: {
-      classes: {
-        dir: './test/classes/'
+    // Compile LESS
+    less: {
+      production: {
+        options: {
+          yuicompress: true,
+          relativeUrls: true
+        },
+        files: {}
       },
-      options: {
-        bin: 'vendor/bin/phpunit',
-        bootstrap: 'test/bootstrap.php',
-        colors: true
+      development: {
+        options: {
+          relativeUrls: true
+        },
+        files: {}
       }
     },
 
-    phpcs: {
-      options: {
-        bin: _paths.phpcs,
-        standard: 'PSR2',
-        warningSeverity: 1,
-        reportFile: 'static/wiki/PHP-CS.md'
-      },
-      application: {
-        dir: [ 'lib/*.php' ]
-      }
-    },
-
-    // Development Watch.
     watch: {
       options: {
         interval: 100,
         debounceDelay: 500
+      },
+      less: {
+        files: [
+          'static/styles/src/*.*'
+        ],
+        tasks: [ 'less' ]
       },
       js: {
         files: [
@@ -93,12 +83,25 @@ module.exports = function build( grunt ) {
       }
     },
 
-    // Uglify Scripts.
     uglify: {
       production: {
         options: {
-          preserveComments: false,
-          wrap: false
+          mangle: false,
+          beautify: false
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'static/scripts/src',
+            src: [ '*.js' ],
+            dest: 'static/scripts'
+          }
+        ]
+      },
+      staging: {
+        options: {
+          mangle: false,
+          beautify: true
         },
         files: [
           {
@@ -111,7 +114,6 @@ module.exports = function build( grunt ) {
       }
     },
 
-    // Generate Markdown.
     markdown: {
       all: {
         files: [
@@ -134,78 +136,106 @@ module.exports = function build( grunt ) {
       }
     },
 
-    // Clean for Development.
     clean: {
-      composer: [
+      all: [
         "composer.lock"
-      ],
-      test: [
-        ".test"
       ]
     },
 
-    // CLI Commands.
     shell: {
-      install: {
-        options: { stdout: true },
-        command: 'composer install --prefer-dist --dev --no-interaction --quiet'
+      /**
+       * Build project
+       */
+      build: {
+        command: function( tag, build_type ) {
+          return [
+            'sh build.sh ' + tag + ' ' + build_type
+          ].join( ' && ' );
+        },
+        options: {
+          encoding: 'utf8',
+          stderr: true,
+          stdout: true
+        }
       },
+      /**
+       * Runs PHPUnit test, creates code coverage and sends it to Scrutinizer
+       */
+      coverageScrutinizer: {
+        command: [
+          'grunt phpunit:circleci --coverage-clover=coverage.clover',
+          'wget https://scrutinizer-ci.com/ocular.phar',
+          'php ocular.phar code-coverage:upload --format=php-clover coverage.clover'
+        ].join( ' && ' ),
+        options: {
+          encoding: 'utf8',
+          stderr: true,
+          stdout: true
+        }
+      },
+      /**
+       * Runs PHPUnit test, creates code coverage and sends it to Code Climate
+       */
+      coverageCodeClimate: {
+        command: [
+          'grunt phpunit:circleci --coverage-clover build/logs/clover.xml',
+          'CODECLIMATE_REPO_TOKEN='+ process.env.CODECLIMATE_REPO_TOKEN + ' ./vendor/bin/test-reporter'
+        ].join( ' && ' ),
+        options: {
+          encoding: 'utf8',
+          stderr: true,
+          stdout: true
+        }
+      },
+      /**
+       *
+       */
       update: {
-        options: { stdout: true },
-        command: 'composer update --prefer-source --no-interaction --quiet'
+        options: {
+          stdout: true
+        },
+        command: 'composer update --prefer-source'
       }
     },
-
-    // Tests.
-    mochaTest: {
+    
+    // Runs PHPUnit Tests
+    phpunit: {
+      classes: {},
       options: {
-        timeout: 10000,
-        log: true,
-        require: [ 'should' ],
-        reporter: 'mocha-audit-reporter',
-        ui: 'exports'
+        bin: './vendor/bin/phpunit',
       },
-      basic: {
-        src: [ 'test/*.js' ]
+      local: {
+        configuration: './test/php/phpunit.xml'
+      },
+      circleci: {
+        configuration: './test/php/phpunit-circle.xml'
       }
     }
 
   });
 
+  // Register tasks
+  grunt.registerTask( 'default', [ 'markdown', 'less' , 'yuidoc', 'uglify' ] );
   
-  // Register NPM Tasks.
-  grunt.registerTask( 'default', function() {
+  // Build Distribution
+  grunt.registerTask( 'distribution', [ 'pot' ] );
 
-    //grunt.task.run( 'mochaTest' );
-    
-    if( grunt.config.get( 'meta.ci' ) ) {
-      // grunt.task.run( 'test:quality' );
-    }
-    
-  });
-
+  // Update Environment
+  grunt.registerTask( 'update', [ "clean", "shell:update" ] );
   
-  // Register NPM Tasks.
-  grunt.registerTask( 'install', function() {
-
-    //grunt.task.run( 'mochaTest' );
-    
-    if( grunt.config.get( 'meta.ci' ) ) {
-      // grunt.task.run( 'test:quality' );
-    }
-    
+  // Run coverage tests
+  grunt.registerTask( 'testscrutinizer', [ 'shell:coverageScrutinizer' ] );
+  grunt.registerTask( 'testcodeclimate', [ 'shell:coverageCodeClimate' ] );
+  
+  // Test and Build
+  grunt.registerTask( 'localtest', [ 'phpunit:local' ] );
+  grunt.registerTask( 'test', [ 'phpunit:circleci' ] );
+  
+  // Build project
+  grunt.registerTask( 'build', 'Run all my build tasks.', function( tag, build_type ) {
+    if ( tag == null ) grunt.warn( 'Build tag must be specified, like build:1.0.0' );
+    if( build_type == null ) build_type = 'production';
+    grunt.task.run( 'shell:build:' + tag + ':' + build_type );
   });
-
-  // Register NPM Tasks.
-  grunt.registerTask( 'publish', function() {
-
-    //grunt.task.run( 'mochaTest' );
-    
-    if( grunt.config.get( 'meta.ci' ) ) {
-      // grunt.task.run( 'test:quality' );
-    }
-    
-  });
-
 
 };

@@ -1,1 +1,1 @@
-WordPress Plugin
+{%= plugin_name %} Plugin

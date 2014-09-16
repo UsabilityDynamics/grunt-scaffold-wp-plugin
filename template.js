@@ -17,7 +17,7 @@ exports.description = 'Create Wordpress Plugin.';
 exports.template = function(grunt, init, done) {
 
   var prompts = [
-    init.prompt( 'plugin_name' ),
+    init.prompt( 'plugin_name', 'My WP-Plugin' ),
     init.prompt( 'plugin_filename', 'plugin-file' ),
     init.prompt( 'plugin_slug', 'plugin_slug_with_underscore' ),
     init.prompt( 'plugin_url', 'https://usabilitydynamics.com' ),
