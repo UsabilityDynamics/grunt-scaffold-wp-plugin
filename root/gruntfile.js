@@ -188,13 +188,22 @@ module.exports = function build( grunt ) {
         }
       },
       /**
-       *
+       * Composer Install
+       */
+      install: {
+        options: {
+          stdout: true
+        },
+        command: 'composer install --no-dev'
+      },
+      /**
+       * Composer Update
        */
       update: {
         options: {
           stdout: true
         },
-        command: 'composer update --prefer-source'
+        command: 'composer update --no-dev --prefer-source'
       }
     },
     
