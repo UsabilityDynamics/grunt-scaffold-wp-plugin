@@ -17,35 +17,6 @@ module.exports = function build( grunt ) {
   grunt.initConfig( {
 
     package: grunt.file.readJSON( 'composer.json' ),
-
-    // Locale.
-    pot: {
-      options:{
-        package_name: '{%= name %}',
-        package_version: '<%= package.version %>',
-        text_domain: '{%= text_domain %}',
-        dest: 'static/languages/',
-        keywords: [ 'gettext', 'ngettext:1,2' ]
-      },
-      files:{
-        src:  [ '**/*.php', 'lib/*.php' ],
-        expand: true
-      }
-    },
-    
-    // Documentation.
-    yuidoc: {
-      compile: {
-        name: '<%= package.name %>',
-        description: '<%= package.description %>',
-        version: '<%= package.version %>',
-        url: '<%= package.homepage %>',
-        options: {
-          paths: 'lib',
-          outdir: 'static/codex/'
-        }
-      }
-    },
     
     markdown: {
       all: {
@@ -228,10 +199,10 @@ module.exports = function build( grunt ) {
   });
 
   // Register tasks
-  grunt.registerTask( 'default', [ 'markdown', 'less' , 'yuidoc', 'uglify' ] );
+  grunt.registerTask( 'default', [ 'markdown', 'less' , 'uglify' ] );
   
   // Build Distribution
-  grunt.registerTask( 'distribution', [ 'pot', 'yuidoc', 'markdown' ] );
+  grunt.registerTask( 'distribution', [ 'markdown' ] );
 
   // Install|Update Environment
   grunt.registerTask( 'install', [ "clean:all", "shell:install" ] );

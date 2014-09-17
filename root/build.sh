@@ -179,16 +179,6 @@ else
     npm install --production
     echo "Running: composer install --no-dev --no-interaction"
     composer install --no-dev --no-interaction --quiet
-    
-    # Determine if grunt install can be run
-    hash grunt install &> /dev/null
-    if [ $? -eq 1 ]; then
-      echo "Warning: grunt install can not be run because task is not registered. Skip this step."
-    else
-      echo "Running: grunt install --force --environment=production"
-      grunt install --force --environment=production
-    fi
-    
   	echo "---"
   	
   fi
@@ -221,12 +211,6 @@ else
   git add -f vendor
   echo "---"
   
-  echo "Generate codex."
-  grunt distribution
-  echo "Be sure we added static/codex directory"
-  git add -f static/codex
-  echo "---"
-
   echo "Now commit our build to remote branch"
   git commit -m "[ci skip] Distributive Auto Build" --quiet
   git pull
