@@ -46,6 +46,28 @@ module.exports = function build( grunt ) {
         }
       }
     },
+    
+    markdown: {
+      all: {
+        files: [
+          {
+            expand: true,
+            src: 'readme.md',
+            dest: 'static/',
+            ext: '.html'
+          }
+        ],
+        options: {
+          markdownOptions: {
+            gfm: true,
+            codeLines: {
+              before: '<span>',
+              after: '</span>'
+            }
+          }
+        }
+      }
+    },
 
     // Compile LESS
     less: {
@@ -114,37 +136,19 @@ module.exports = function build( grunt ) {
       }
     },
 
-    markdown: {
-      all: {
-        files: [
-          {
-            expand: true,
-            src: 'readme.md',
-            dest: 'static/',
-            ext: '.html'
-          }
-        ],
-        options: {
-          markdownOptions: {
-            gfm: true,
-            codeLines: {
-              before: '<span>',
-              after: '</span>'
-            }
-          }
-        }
-      }
-    },
-
     clean: {
+      update: [
+        "composer.lock"
+      ],
       all: [
+        "vendor",
         "composer.lock"
       ]
     },
 
     shell: {
       /**
-       * Build project
+       * Build Distribution
        */
       build: {
         command: function( tag, build_type ) {
@@ -227,10 +231,11 @@ module.exports = function build( grunt ) {
   grunt.registerTask( 'default', [ 'markdown', 'less' , 'yuidoc', 'uglify' ] );
   
   // Build Distribution
-  grunt.registerTask( 'distribution', [ 'pot' ] );
+  grunt.registerTask( 'distribution', [ 'pot', 'yuidoc', 'markdown' ] );
 
-  // Update Environment
-  grunt.registerTask( 'update', [ "clean", "shell:update" ] );
+  // Install|Update Environment
+  grunt.registerTask( 'install', [ "clean:all", "shell:install" ] );
+  grunt.registerTask( 'update', [ "clean:update", "shell:update" ] );
   
   // Run coverage tests
   grunt.registerTask( 'testscrutinizer', [ 'shell:coverageScrutinizer' ] );
