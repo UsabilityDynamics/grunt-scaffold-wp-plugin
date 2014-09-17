@@ -3,7 +3,7 @@
   "version": "{%= version %}",
   "type": "plugin",
   "minimum-stability": "dev",
-  "homepage": "http://github.com/{%= github_vendor %}/{%= github_name %}",
+  "homepage": "{%= homepage %}",
   "author": {
     "name": "{%= author_name %}",
     "url": "{%= author_url %}"
@@ -44,7 +44,7 @@
     "schemas": {
       "dependencies" : {
         "modules": {},
-        "plugins": {}
+        "plugins": []
       },
       "licenses" : {
         "client" : false,
