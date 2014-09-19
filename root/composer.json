@@ -20,7 +20,7 @@
   },
   "require": {
     "php": ">=5.3",
-    "usabilitydynamics/lib-wp-bootstrap": "1.0.1"
+    "usabilitydynamics/lib-wp-bootstrap": "master"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",
