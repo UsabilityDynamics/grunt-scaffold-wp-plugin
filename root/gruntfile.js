@@ -119,12 +119,12 @@ module.exports = function build( grunt ) {
 
     shell: {
       /**
-       * Build Distribution
+       * Make Production Build and create new tag ( release ) on Github.
        */
       build: {
-        command: function( tag, build_type ) {
+        command: function( tag ) {
           return [
-            'sh build.sh ' + tag + ' ' + build_type
+            'sh build.sh ' + tag
           ].join( ' && ' );
         },
         options: {
@@ -166,19 +166,19 @@ module.exports = function build( grunt ) {
        * Composer Install
        */
       install: {
-        options: {
-          stdout: true
+        command: function( env ) {
+          return [
+            'composer install --no-dev',
+            'rm -rf ./vendor/composer/installers',
+            'find ./vendor -name .git -exec rm -rf \'{}\' \\;',
+            'find ./vendor -name .svn -exec rm -rf \'{}\' \\;',
+          ].join( ' && ' );
         },
-        command: 'composer install --no-dev'
-      },
-      /**
-       * Composer Update
-       */
-      update: {
         options: {
+          encoding: 'utf8',
+          stderr: true,
           stdout: true
-        },
-        command: 'composer update --no-dev --prefer-source'
+        }
       }
     },
     
@@ -201,26 +201,21 @@ module.exports = function build( grunt ) {
   // Register tasks
   grunt.registerTask( 'default', [ 'markdown', 'less' , 'uglify' ] );
   
-  // Build Distribution
-  grunt.registerTask( 'distribution', [ 'markdown' ] );
-
-  // Install|Update Environment
+  // Install Environment
   grunt.registerTask( 'install', [ "clean:all", "shell:install" ] );
-  grunt.registerTask( 'update', [ "clean:update", "shell:update" ] );
+  
+  // Run default Tests
+  grunt.registerTask( 'localtest', [ 'phpunit:local' ] );
+  grunt.registerTask( 'test', [ 'phpunit:circleci' ] );
   
   // Run coverage tests
   grunt.registerTask( 'testscrutinizer', [ 'shell:coverageScrutinizer' ] );
   grunt.registerTask( 'testcodeclimate', [ 'shell:coverageCodeClimate' ] );
   
-  // Test and Build
-  grunt.registerTask( 'localtest', [ 'phpunit:local' ] );
-  grunt.registerTask( 'test', [ 'phpunit:circleci' ] );
-  
-  // Build project
-  grunt.registerTask( 'build', 'Run all my build tasks.', function( tag, build_type ) {
-    if ( tag == null ) grunt.warn( 'Build tag must be specified, like build:1.0.0' );
-    if( build_type == null ) build_type = 'production';
-    grunt.task.run( 'shell:build:' + tag + ':' + build_type );
+  // Make Production Build and create new tag ( release ) on Github.
+  grunt.registerTask( 'build', 'Run all my build tasks.', function( tag ) {
+    if ( tag == null ) grunt.warn( 'Release tag must be specified, like build:1.0.0' );
+    grunt.task.run( 'shell:build:' + tag );
   });
 
 };

@@ -1,7 +1,6 @@
 {
   "name": "{%= github_vendor %}/{%= github_name %}",
-  "version": "{%= version %}",
-  "type": "plugin",
+  "type": "wordpress-plugin",
   "minimum-stability": "dev",
   "homepage": "{%= homepage %}",
   "author": {
@@ -20,17 +19,19 @@
   },
   "require": {
     "php": ">=5.3",
-    "usabilitydynamics/lib-wp-bootstrap": "master"
+    "composer/installers": "v1.0.18",
+    "usabilitydynamics/lib-wp-bootstrap": "~1.0"
   },
   "require-dev": {
-    "usabilitydynamics/lib-wp-phpunit": "master",
-    "codeclimate/php-test-reporter": "dev-master"
+    "usabilitydynamics/lib-wp-phpunit": "~0.2",
+    "codeclimate/php-test-reporter": "~0.1"
   },
   "autoload": {
     "classmap": [ "lib/classes" ]
   },
   "archive": {
     "exclude": [
+      "vendor",
       "node_modules",
       ".gitignore",
       "test",
