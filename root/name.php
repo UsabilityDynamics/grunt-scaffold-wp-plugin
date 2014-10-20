@@ -15,7 +15,7 @@
 if( !function_exists( 'ud_get_{%= slug %}' ) ) {
 
   /**
-   * Returns {%= plugin_name %} Instance
+   * Returns {%= title %} Instance
    *
    * @author Usability Dynamics, Inc.
    * @since {%= version %}
@@ -71,7 +71,7 @@ if( !function_exists( 'ud_check_{%= slug %}' ) ) {
 
 }
 
-if( !function_exists( 'ud_my_wp_plugin_message' ) ) {
+if( !function_exists( 'ud_{%= slug %}_message' ) ) {
   /**
    * Renders admin notes in case there are errors on plugin init
    *

@@ -1,7 +1,7 @@
 <?php
 
 /**  */
-define( 'ABSPATH', dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/automattic/wordpress/' );
+define( 'ABSPATH', dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/usabilitydynamics/wordpress/' );
 
 /** */
 define( 'DB_NAME', 'circle_test' );
