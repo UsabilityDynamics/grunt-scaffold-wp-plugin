@@ -8,7 +8,7 @@ namespace {%= namespace %} {
 
   if( !class_exists( '{%= namespace %}\{%= bootstrap_class %}' ) ) {
 
-    final class {%= bootstrap_class %} extends \UsabilityDynamics\WP\Bootstrap {
+    final class {%= bootstrap_class %} extends \UsabilityDynamics\WP\Bootstrap_Plugin {
       
       /**
        * Singleton Instance Reference.
