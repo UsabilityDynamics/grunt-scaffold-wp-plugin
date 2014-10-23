@@ -121,7 +121,7 @@ module.exports = function build( grunt ) {
       /**
        * Make Production Build and create new tag ( release ) on Github.
        */
-      build: {
+      release: {
         command: function( tag ) {
           return [
             'sh build.sh ' + tag
@@ -222,9 +222,9 @@ module.exports = function build( grunt ) {
   });
   
   // Make Production Build and create new tag ( release ) on Github.
-  grunt.registerTask( 'build', 'Run all my build tasks.', function( tag ) {
-    if ( tag == null ) grunt.warn( 'Release tag must be specified, like build:1.0.0' );
-    grunt.task.run( 'shell:build:' + tag );
+  grunt.registerTask( 'release', 'Run all my release tasks.', function( tag ) {
+    if ( tag == null ) grunt.warn( 'Release tag must be specified, like release:1.0.0' );
+    grunt.task.run( 'shell:release:' + tag );
   });
 
 };

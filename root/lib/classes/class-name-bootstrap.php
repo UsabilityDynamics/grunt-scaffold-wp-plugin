@@ -24,12 +24,9 @@ namespace {%= namespace %} {
        * Instantaite class.
        */
       public function init() {
-        //** Be sure we do not have errors. Do not initialize plugin if we have them. */
-        if( $this->has_errors() ) {
-          return null;
-        }
         
         //** Here is we go. */
+        
       }
       
       /**
