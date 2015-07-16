@@ -8,7 +8,7 @@
  * Text Domain: {%= text_domain %}
  * Author URI: http://usabilitydynamics.com
  *
- * Copyright 2012 - 2014 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
+ * Copyright 2012 - 2015 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
  *
  */
 
